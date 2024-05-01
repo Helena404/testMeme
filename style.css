@@ -1,0 +1,463 @@
+@font-face {
+  font-family: 'JustMeAgainDownHere';
+  src: url(./fonts/JustMeAgainDownHere.woff2) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'LongCang';
+  src: url(./fonts/LongCang-Regular.woff2) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/**
+  Нормализация блочной модели
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/**
+   Убираем внутренние отступы слева тегам списков,
+   у которых есть атрибут class
+  */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+   Убираем внешние отступы body и двум другим тегам,
+   у которых есть атрибут class
+  */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+   Убираем внешние отступы вертикали нужным тегам,
+   у которых есть атрибут class
+  */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+   Убираем стандартный маркер маркированному списку,
+   у которого есть атрибут class
+  */
+:where(ul[class]) {
+  list-style: none;
+}
+
+/**
+   Обнуляем вертикальные внешние отступы параграфа,
+   объявляем локальную переменную для внешнего отступа вниз,
+   чтобы избежать взаимодействие с более сложным селектором
+  */
+p {
+  --paragraphMarginBottom: 24px;
+
+  margin-block: 0;
+}
+
+/**
+   Внешний отступ вниз для параграфа без атрибута class,
+   который расположен не последним среди своих соседних элементов
+  */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+   Упрощаем работу с изображениями
+  */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/**
+   Наследуем свойства шрифт для полей ввода
+  */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+	 Пригодится в большинстве ситуаций
+	 (когда, например, нужно будет "прижать" футер к низу сайта)
+	*/
+  height: 100%;
+}
+
+/**
+   Плавный скролл
+  */
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+	 Пригодится в большинстве ситуаций
+	 (когда, например, нужно будет "прижать" футер к низу сайта)
+	*/
+  min-height: 100%;
+  /**
+	 Унифицированный интерлиньяж
+	*/
+  line-height: 1.5;
+}
+
+/**
+   Приводим к единому цвету svg-элементы
+  */
+svg *[fill] {
+  fill: currentColor;
+}
+svg *[stroke] {
+  stroke: currentColor;
+}
+
+/**
+   Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+  */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+   Удаляем все анимации и переходы для людей,
+   которые предпочитают их не использовать
+  */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:root {
+  --color-blue: #004aad;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-red: #ff0000;
+  --color-light-blue: #accfff;
+  --color-dark-red: #af0000;
+
+  --font-family-base: 'JustMeAgainDownHere', sans-serif;
+
+  --container-width: 1300px;
+  --container-padding-x: 15px;
+
+  --transition-duration: 0.2s;
+}
+
+body {
+  font-family: var(--font-family-base);
+  color: var(--color-white);
+  font-size: 36px;
+  background-color: var(--color-white);
+}
+
+a,
+button,
+svg * {
+  transition-duration: var(--transition-duration);
+}
+
+a {
+  color: var(--color-white);
+}
+a:hover {
+  color: var(--color-light-blue);
+}
+
+[class*='__container'] {
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+}
+
+button {
+  display: inline-flex;
+  height: 77px;
+  align-items: center;
+  background-color: var(--color-red);
+  color: var(--color-white);
+  border: none;
+  border-radius: 16px;
+  white-space: nowrap;
+  font-size: 32px;
+  padding-inline: 7px;
+}
+.button:hover {
+  background-color: var(--color-dark-red);
+}
+
+/*-----------------------------Header Section-----------------------------------*/
+
+.header {
+  background-color: var(--color-blue);
+  padding-bottom: 50px;
+}
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 20px;
+  padding-inline: 40px;
+  padding-top: 20px;
+}
+
+.header-logo {
+  font-size: 83px;
+  text-decoration: none;
+}
+.header-menu-list {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 49px;
+  align-items: center;
+  row-gap: 20px;
+}
+
+.header-menu-link {
+  font-size: 40px;
+  text-decoration: none;
+}
+
+/*--------------------------Banner Content--------------------------------------*/
+
+.banner {
+  background-color: var(--color-blue);
+  position: relative;
+  padding-bottom: 44px;
+}
+.banner__container {
+  padding-left: clamp(2.813rem, -1.976rem + 17.82vw, 12.5rem);
+}
+.banner-content {
+  display: flex;
+  align-items: center;
+  column-gap: clamp(0.313rem, -1.078rem + 5.17vw, 3.125rem);
+}
+.banner-img-youtube {
+  width: clamp(4.25rem, -0.291rem + 16.9vw, 13.438rem);
+  height: auto;
+}
+.banner-text {
+  position: relative;
+  margin-bottom: 40px;
+}
+.banner-title {
+  font-size: clamp(3.188rem, 0.315rem + 10.69vw, 9rem);
+}
+.banner-subtitle {
+  position: absolute;
+  font-size: clamp(1.875rem, 0.454rem + 5.29vw, 4.75rem);
+  white-space: nowrap;
+  bottom: -40px;
+  right: 5px;
+}
+.banner-socials {
+  display: flex;
+  column-gap: clamp(1.75rem, -0.165rem + 7.13vw, 5.625rem);
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.banner-rectangle {
+  margin-inline: auto;
+  width: clamp(21.125rem, 13.032rem + 30.11vw, 37.5rem);
+  height: 40px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.banner-decoration-img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: clamp(4.688rem, -7.638rem + 45.86vw, 29.625rem);
+  height: auto;
+  border-radius: 28px;
+}
+
+/*---------------About Section --------------------*/
+
+.about {
+  color: var(--color-black);
+}
+.about__container {
+  padding-block: 35px 110px;
+  padding-left: clamp(1.25rem, -2.766rem + 14.94vw, 9.375rem);
+}
+.about-content {
+  display: flex;
+  justify-content: center;
+  column-gap: 60px;
+  align-items: center;
+}
+.about-img-wrapper {
+  background-color: var(--color-blue);
+  display: inline-block;
+  border-radius: 50%;
+  width: 310px;
+  height: 310px;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+}
+.about-img {
+  display: block;
+  position: absolute;
+  bottom: -5px;
+}
+.about-title {
+  font-size: clamp(3.75rem, 3.04rem + 2.64vw, 5.188rem);
+}
+.about-text {
+  font-family: 'LongCang', sans-serif;
+  font-size: clamp(1.563rem, 1.223rem + 1.26vw, 2.25rem);
+  text-align: center;
+}
+.about-text a {
+  color: var(--color-black);
+}
+
+/* -------------------------how section-------------- */
+.how {
+  background-color: var(--color-blue);
+  position: relative;
+}
+.how__container {
+  padding-bottom: 50px;
+}
+.how-title {
+  font-size: clamp(3.75rem, 2.545rem + 4.48vw, 6.188rem);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.how-content {
+  display: grid;
+  grid-template-columns: 418px 306px 408px;
+  gap: 50px;
+}
+
+.how-column {
+}
+.how-column:nth-child(4) {
+  grid-column: 1 / 4;
+  margin: 0 auto;
+  width: 350px;
+}
+.how-content-title {
+  font-size: 44px;
+  text-transform: uppercase;
+}
+.how-content-text {
+  font-family: 'LongCang', sans-serif;
+  font-size: 30px;
+}
+.how-decoration {
+  position: absolute;
+  top: -25px;
+  right: 0;
+}
+
+/*---------------------------Media Section-------------------------------------*/
+
+.media {
+}
+.media__container {
+}
+.media-content-row {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: space-between;
+  padding-bottom: 80px;
+}
+.media-img {
+}
+
+/*-------------Footer--------------*/
+.footer {
+  background-color: var(--color-black);
+}
+.footer__container {
+  padding-block: 55px;
+}
+.footer-text {
+  text-align: center;
+  font-size: clamp(1.875rem, 1.443rem + 1.61vw, 2.75rem);
+}
+
+/*-----------------------------Media-----------------------------------*/
+
+@media (max-width: 1500px) {
+  .header__container {
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 17px;
+  }
+  .header-menu-list {
+    justify-content: space-between;
+  }
+  .header-menu-item {
+    max-width: 150px;
+    word-wrap: break-word;
+  }
+  .banner-decoration-img {
+    position: relative;
+  }
+  .banner-subtitle {
+    position: relative;
+    bottom: 0;
+  }
+  .banner-text {
+    margin-bottom: 0;
+  }
+  .about-content {
+    flex-wrap: wrap;
+  }
+  .how-content {
+    grid-template-columns: 418px;
+    justify-content: center;
+  }
+  .how-column:nth-child(4) {
+    grid-column: 1;
+    margin: 0;
+    width: auto;
+  }
+  .how-decoration {
+    transform: scale(0.6);
+    top: -100px;
+  }
+  .media-content-row {
+    flex-wrap: wrap;
+  }
+}

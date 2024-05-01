@@ -290,6 +290,10 @@ button {
   justify-content: center;
   margin-bottom: 24px;
 }
+.banner-socials a:hover {
+  background-color: var(--color-light-blue);
+  border-radius: 50%;
+}
 .banner-rectangle {
   margin-inline: auto;
   width: clamp(21.125rem, 13.032rem + 30.11vw, 37.5rem);

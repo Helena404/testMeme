@@ -371,8 +371,6 @@ button {
   gap: 50px;
 }
 
-.how-column {
-}
 .how-column:nth-child(4) {
   grid-column: 1 / 4;
   margin: 0 auto;
@@ -393,19 +391,13 @@ button {
 }
 
 /*---------------------------Media Section-------------------------------------*/
-
-.media {
-}
-.media__container {
-}
 .media-content-row {
   display: flex;
+  align-items: center;
   flex-wrap: nowrap;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
   padding-bottom: 80px;
-}
-.media-img {
 }
 
 /*-------------Footer--------------*/
@@ -422,7 +414,7 @@ button {
 
 /*-----------------------------Media-----------------------------------*/
 
-@media (max-width: 1500px) {
+@media only screen and (min-width: 1201px) and (max-width: 1500px) {
   .header__container {
     justify-content: center;
     flex-wrap: wrap;
@@ -449,17 +441,58 @@ button {
     flex-wrap: wrap;
   }
   .how-content {
-    grid-template-columns: 418px;
+    grid-template-columns: 1fr 1fr;
     justify-content: center;
+  }
+  .how-column:nth-child(4) {
+    grid-column: 2;
+    margin: 0;
+    width: auto;
+  }
+  .media-content-row {
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (min-width: 380px) and (max-width: 1200px) {
+  .header__container {
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 17px;
+  }
+  .header-menu-list {
+    justify-content: space-between;
+  }
+  .header-menu-item {
+    max-width: 150px;
+    word-wrap: break-word;
+  }
+  .banner-decoration-img {
+    position: relative;
+  }
+  .banner-subtitle {
+    position: relative;
+    bottom: 0;
+  }
+  .banner-text {
+    margin-bottom: 0;
+  }
+  .about-content {
+    flex-wrap: wrap;
+  }
+  .how-content {
+    padding-inline: var(--container-padding-x);
+    grid-template-columns: 1fr;
+    justify-content: center;
+  }
+  .how-decoration {
+    transform: scale(0.5);
+    top: -100px;
   }
   .how-column:nth-child(4) {
     grid-column: 1;
     margin: 0;
     width: auto;
-  }
-  .how-decoration {
-    transform: scale(0.6);
-    top: -100px;
   }
   .media-content-row {
     flex-wrap: wrap;
